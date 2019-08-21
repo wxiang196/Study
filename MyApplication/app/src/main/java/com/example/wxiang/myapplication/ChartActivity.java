@@ -22,9 +22,11 @@ public class ChartActivity extends BaseActivity {
         setContentView(R.layout.chartlayout);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         mChart = findViewById(R.id.chart1);
-        //mChart.setOnChartValueSelectedListener(this);
+        mChart.setOnChartValueSelectedListener(this);
         //设置是否绘制chart边框的线
         mChart.setBorderColor(Color.RED);
+        //设置图表背景颜色
+        mChart.setBackgroundColor(Color.WHITE);
         //设置char线边框线宽度
         mChart.setBorderWidth(1f);
         //设置chart是否可触摸
@@ -43,10 +45,11 @@ public class ChartActivity extends BaseActivity {
         mChart.animateXY(2000, 2000);
         //设置X轴和Y轴的点
         List<Entry> entryList = new ArrayList<>();
-        for (int i = 0; i <= 15; i++) {
-            entryList.add(new Entry(i, new Random().nextInt(300)));
+        for (float i = 0; i <= 15; i++) {
+            entryList.add(new Entry(i,(float)(Math.sin(Math.toRadians(i)))));
         }
         LineDataSet lineDataSet = new LineDataSet(entryList, "Label");
+        lineDataSet.setColor(Color.RED);
         //设置数据刷新图表
         LineData lineData = new LineData(lineDataSet);
         mChart.setData(lineData);
